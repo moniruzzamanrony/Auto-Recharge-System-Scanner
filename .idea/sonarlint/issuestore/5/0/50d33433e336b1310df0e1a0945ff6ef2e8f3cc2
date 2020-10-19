@@ -1,0 +1,13 @@
+
+gsquid:S1301_"KReplace this "switch" statement by "if" statements to increase readability.(Ì»¹üÿÿÿÿ
+gsquid:S1301n"KReplace this "switch" statement by "if" statements to increase readability.(×ö³–úÿÿÿÿ
+Xsquid:UselessImportCheck"4Remove this unused import 'android.content.Context'.(©Ê‰è
+Zsquid:UselessImportCheck"6Remove this unused import 'android.app.PendingIntent'.(šºŞ—
+bsquid:UselessImportCheck"?Remove this unused import 'android.telephony.TelephonyManager'.(Ìâû1
+@squid:S1148Š"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+ksquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(ÈÄ‚Ñøÿÿÿÿ
+Asquid:S1659"%Declare "smsText" on a separate line.(ÆÇÈ™şÿÿÿÿ
+=squid:S1659"&Declare "phoneBtn" on a separate line.(×ì®Ş
+osquid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ü–ˆ²úÿÿÿÿ
+U"squid:SwitchLastCaseIsDefaultCheck_""Add a default case to this switch.(Ì»¹üÿÿÿÿ
+U"squid:SwitchLastCaseIsDefaultCheckn""Add a default case to this switch.(×ö³–úÿÿÿÿ

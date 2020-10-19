@@ -1,0 +1,7 @@
+
+isquid:S00117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÛœœÍ
+fsquid:MaximumInheritanceDepth"=This class has 10 parents which is greater than 5 authorized.(²Ú±
+=squid:S1659"!Declare "age" on a separate line.(²Á¤®úÿÿÿÿ
+?squid:S1659"#Declare "email" on a separate line.(²Á¤®úÿÿÿÿ
+Asquid:S00108G")Either remove or fill this block of code.(”ı¾
+asquid:CommentedOutCodeLine*"<This block of commented-out lines of code should be removed.(‚ğĞ.

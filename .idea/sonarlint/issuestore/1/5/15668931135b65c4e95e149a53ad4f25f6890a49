@@ -1,0 +1,5 @@
+
+?squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
+fsquid:S00100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(äÎ“‘
+Isquid:S4925"-Remove this "Class.forName()", it is useless.(¹µÖÁüÿÿÿÿ
+7squid:S2068" Remove this hard-coded password.(´Ğğ
