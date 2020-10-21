@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-smallcaps"
-            android:padding="5dp"
+            android:padding="10dp"
             android:text="Home"
             android:textSize="15dp"
             android:textStyle="bold" />

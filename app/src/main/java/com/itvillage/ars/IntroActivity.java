@@ -42,7 +42,7 @@ public class IntroActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
             }
-        }, 2000);
+        }, 3000);
 
     }
 }

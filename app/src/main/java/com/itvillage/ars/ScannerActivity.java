@@ -42,6 +42,7 @@ public class ScannerActivity extends AppCompatActivity {
     CodeScanner codeScanner;
     Dialog dialog;
     Button but;
+
     private String packageName, userName, shopName, mac, phoneNo, email, userId, shopAddress, price;
 
     @Override
@@ -70,7 +71,7 @@ public class ScannerActivity extends AppCompatActivity {
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.CAMERA)) {
-            Toast.makeText(this, "Camera access is required to Scan The Barcode.",
+            Toast.makeText(this, "Scan Your Requested Customer QR Code",
                     Toast.LENGTH_LONG).show();
             // Request the permission
             ActivityCompat.requestPermissions(ScannerActivity.this,
@@ -78,7 +79,7 @@ public class ScannerActivity extends AppCompatActivity {
                     1);
         } else {
             Toast.makeText(this,
-                    "<b>Camera could not be opened.</b>\\nThis occurs when the camera is not available (for example it is already in use) or if the system has denied access (for example when camera access has been disabled).", Toast.LENGTH_SHORT).show();
+                    "Camera could not be opened.).", Toast.LENGTH_SHORT).show();
 
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA}, 1);
@@ -101,7 +102,7 @@ public class ScannerActivity extends AppCompatActivity {
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(false);
                         dialog.setContentView(R.layout.custom_dialog);
-                        EditText sPrice = dialog.findViewById(R.id.price);
+                        final EditText sPriceEditText = dialog.findViewById(R.id.price);
 
                         packageName = results[4];
                         userName = results[1];
@@ -111,7 +112,7 @@ public class ScannerActivity extends AppCompatActivity {
                         email = results[5];
                         userId = results[3];
                         shopAddress = results[7];
-                        price = sPrice.getText().toString();
+
 
                         TextView packageName = (TextView) dialog.findViewById(R.id.packageName);
                         packageName.setText(results[4]);
@@ -131,11 +132,15 @@ public class ScannerActivity extends AppCompatActivity {
                         send.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-
-                                Doregister gg = new Doregister();
-                                gg.execute("");
-                                dialog.dismiss();
-                                sendMail();
+                                price = sPriceEditText.getText().toString();
+                                if (price.equals("")) {
+                                    Toast.makeText(getApplicationContext(), "Price Fill Empty", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Doregister gg = new Doregister();
+                                    gg.execute("");
+                                    dialog.dismiss();
+                                    sendMail();
+                                }
                             }
                         });
                         re_scan.setOnClickListener(new View.OnClickListener() {
