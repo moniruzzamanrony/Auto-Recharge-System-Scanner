@@ -17,15 +17,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/FullScreen">
-        <activity android:name="com.itvillage.ars.HomeActivity">
+        <activity
+            android:name="com.itvillage.ars.IntroActivity"
+            android:theme="@style/FullScreenWhite">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.itvillage.ars.ScannerActivity"></activity>
-
+        <activity android:name="com.itvillage.ars.ScannerActivity" />
+        <activity android:name="com.itvillage.ars.HomeActivity"></activity>
     </application>
 
 </manifest>

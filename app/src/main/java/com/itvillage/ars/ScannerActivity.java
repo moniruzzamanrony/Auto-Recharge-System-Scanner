@@ -101,6 +101,7 @@ public class ScannerActivity extends AppCompatActivity {
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setCancelable(false);
                         dialog.setContentView(R.layout.custom_dialog);
+                        EditText sPrice = dialog.findViewById(R.id.price);
 
                         packageName = results[4];
                         userName = results[1];
@@ -110,7 +111,7 @@ public class ScannerActivity extends AppCompatActivity {
                         email = results[5];
                         userId = results[3];
                         shopAddress = results[7];
-                        price = "3000";
+                        price = sPrice.getText().toString();
 
                         TextView packageName = (TextView) dialog.findViewById(R.id.packageName);
                         packageName.setText(results[4]);
@@ -168,6 +169,20 @@ public class ScannerActivity extends AppCompatActivity {
         startActivity(Intent.createChooser(mailIntent, "Send mail..."));
     }
 
+    private String dateIncrement(Date date) {
+        return Config.dateToSting(Config.addDays(date, getPackageDays(packageName)));
+    }
+
+    private int getPackageDays(String value) {
+        int integer = Integer.valueOf(value.replaceAll("[^0-9]", ""));
+        System.out.print(integer);
+        return integer;
+    }
+
+    private String getSerialKey() {
+        return AES.encrypt("elearners.live," + userId + ",\"elearners.live,\"", "itvillage428854");
+    }
+
     public class Doregister extends AsyncTask<String, String, String> {
 
 
@@ -175,6 +190,9 @@ public class ScannerActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
 
             conn = xammpConnector.CONN();
+            if (conn == null) {
+                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_LONG);
+            }
             Log.e("354435",""+conn);
             String Sql = "INSERT INTO `user_info`(`user_id`, `phone_no`, `email`, `shop_name`, `mac_address`, `serial_key`, `active_date`, `expaied_date`, `package_name`, `price`, `client_name`, `initial_password`, `shop_address`, `package_validity`, `role`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
@@ -204,18 +222,5 @@ public class ScannerActivity extends AppCompatActivity {
 
             return "Successfully";
         }
-    }
-    private String dateIncrement(Date date) {
-        return Config.dateToSting(Config.addDays(date,getPackageDays(packageName)));
-    }
-
-    private int getPackageDays(String value) {
-        int integer = Integer.valueOf(value.replaceAll("[^0-9]", ""));
-        System.out.print(integer);
-        return integer;
-    }
-
-    private String getSerialKey() {
-        return AES.encrypt("elearners.live,"+userId+",\"elearners.live,\"","itvillage428854");
     }
 }
