@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Auto Recharge System - Scanner.iml" filepath="$PROJECT_DIR$/Auto Recharge System - Scanner.iml" />
-      <module fileurl="file://D:\Project\Android\AndroidXammpMysql\MysqlwithXammpCRUD.iml" filepath="D:\Project\Android\AndroidXammpMysql\MysqlwithXammpCRUD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Auto-Recharge-System-Scanner.iml" filepath="$PROJECT_DIR$/Auto-Recharge-System-Scanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jtds-1.2.7/jtds-1.2.7.iml" filepath="$PROJECT_DIR$/jtds-1.2.7/jtds-1.2.7.iml" />
     </modules>

@@ -14,7 +14,13 @@ public class XammpConnector {
     public Connection CONN() {
         Connection con = null;
         try {
-
+//            SSLContext sslcontext = SSLContext.getInstance("TLSv1");
+//            sslcontext.init(null, null, null);
+//            SSLSocketFactory NoSSLv3Factory = new NoSSLv3SocketFactory(sslcontext.getSocketFactory());
+//
+//            HttpsURLConnection.setDefaultSSLSocketFactory(NoSSLv3Factory);
+//            HttpsURLConnection l_connection = (HttpsURLConnection) new URL("jdbc:mysql://167.99.76.96:3306/auto_recharge_system?characterEncoding=utf8").openConnection();
+//            System.out.print(l_connection.connect());;
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://167.99.76.96:3306/auto_recharge_system?characterEncoding=utf8", "arm", "L2#j6^%hcyb_?ABAB");
 
@@ -22,8 +28,17 @@ public class XammpConnector {
             Log.e("1",e.getMessage());
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            Log.e("2",e.getMessage());
+            Log.e("2", e.getMessage());
         }
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (KeyManagementException e) {
+//            e.printStackTrace();
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+        //   e.printStackTrace();
+        //  }
 
         return con;
     }
