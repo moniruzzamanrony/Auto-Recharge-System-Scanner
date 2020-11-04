@@ -35,6 +35,7 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.github.monirozzaman:Aes-Encryption-Decryption:v1.0.0'
     implementation 'com.budiyev.android:code-scanner:2.1.0'
+    implementation 'com.squareup.okhttp:okhttp:2.5.0'
     implementation 'com.google.android.gms:play-services:+'
 
 

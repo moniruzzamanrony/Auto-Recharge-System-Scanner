@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -32,7 +31,7 @@ import java.util.Date;
 public class ScannerActivity extends AppCompatActivity {
 
     Button push;
-    XammpConnector xammpConnector;
+    ServerConnector serverConnector;
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -49,7 +48,7 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-        xammpConnector = new XammpConnector();
+        serverConnector = new ServerConnector();
         codeScannerView = findViewById(R.id.codeScannerView);
         dialog = new Dialog(ScannerActivity.this);
         openCamaraForScanner();
@@ -193,37 +192,8 @@ public class ScannerActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-
-            conn = xammpConnector.CONN();
-            if (conn == null) {
-                Toast.makeText(getApplicationContext(), "Server Not Found", Toast.LENGTH_LONG);
-            }
-            Log.e("354435",""+conn);
-            String Sql = "INSERT INTO `user_info`(`user_id`, `phone_no`, `email`, `shop_name`, `mac_address`, `serial_key`, `active_date`, `expaied_date`, `package_name`, `price`, `client_name`, `initial_password`, `shop_address`, `package_validity`, `role`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            try {
-                pst = conn.prepareStatement(Sql);
-                pst.setString(1, userId);
-                pst.setString(2, phoneNo);
-                pst.setString(3, email);
-                pst.setString(4, shopName);
-                pst.setString(5, mac);
-                pst.setString(6, getSerialKey());
-                pst.setString(7, Config.getCurrentDate());
-                pst.setString(8, dateIncrement(Config.stringToDateType(Config.getCurrentDate())));
-                pst.setString(9, packageName);
-                pst.setString(10, price);
-                pst.setString(11, userName);
-                pst.setString(12, phoneNo);
-                pst.setString(13, shopAddress);
-                pst.setString(14, String.valueOf(getPackageDays(packageName)));
-                pst.setString(15, "user");
-                pst.execute();
-
-
-            } catch (Exception e) {
-                Log.e("SQL",e.getMessage());
-            }
+            String url = "http://167.99.76.96/arm/php/UserInfoInsert.php?user_id=" + userId + "&phone_no=" + phoneNo + "&email=" + email + "&shop_name=" + shopName + "&mac_address=" + mac + "&serial_key=" + getSerialKey() + "&active_date=" + Config.getCurrentDate() + "&expaied_date=" + dateIncrement(Config.stringToDateType(Config.getCurrentDate())) + "&package_name=" + packageName + "&price=" + price + "&client_name=" + userName + "&initial_password=" + phoneNo + "&shop_address=" + shopAddress + "&package_validity=" + String.valueOf(getPackageDays(packageName)) + "&role=user";
+            serverConnector.requestSend(url, ScannerActivity.this);
 
             return "Successfully";
         }

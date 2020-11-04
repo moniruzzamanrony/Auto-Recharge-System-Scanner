@@ -1,5 +1,5 @@
 <?php
-   $con=mysqli_connect("localhost:3306","root","","auto_recharge_system");
+   $con=mysqli_connect("localhost:3306","root","L2#j6^%hcyb_?AB","auto_recharge_system");
 
    if (mysqli_connect_errno($con)) {
       echo "Failed to connect to MySQL: " . mysqli_connect_error();
@@ -20,8 +20,8 @@
    $shop_address = $_GET['shop_address'];
    $package_validity = $_GET['package_validity'];
    $role = $_GET['role'];
-
-   $query = INSERT INTO `user_info`(`user_id`, `phone_no`, `email`, `shop_name`, `mac_address`, `serial_key`, `active_date`, `expaied_date`, `package_name`, `price`, `client_name`, `initial_password`, `shop_address`, `package_validity`, `role`) VALUES ('$user_id','$phone_no','$email','$shop_name','$mac_address','$serial_key','$active_date','$expaied_date','$package_name','$price','$client_name','$initial_password','$shop_address','$package_validity','$role')";
+   
+   $query = "INSERT INTO `user_info`(`user_id`, `phone_no`, `email`, `shop_name`, `mac_address`, `serial_key`, `active_date`, `expaied_date`, `package_name`, `price`, `client_name`, `initial_password`, `shop_address`, `package_validity`, `role`) VALUES ('$user_id','$phone_no','$email','$shop_name','$mac_address','$serial_key','$active_date','$expaied_date','$package_name','$price','$client_name','$initial_password','$shop_address','$package_validity','$role')";
 
 
    $result = mysqli_query($con,$query);

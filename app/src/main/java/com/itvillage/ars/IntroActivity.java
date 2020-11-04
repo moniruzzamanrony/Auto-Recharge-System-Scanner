@@ -20,15 +20,12 @@ import com.itvillage.ars.ars.R;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.net.ssl.SSLContext;
 
 public class IntroActivity extends AppCompatActivity {
 
-    XammpConnector xammpConnector;
+    ServerConnector serverConnector;
     Connection conn = null;
     private ImageView logo;
 
@@ -54,7 +51,7 @@ public class IntroActivity extends AppCompatActivity {
 
         addSSLCertificate();
 
-        xammpConnector = new XammpConnector();
+        serverConnector = new ServerConnector();
         Doregister gg = new Doregister();
         gg.execute("");
 
@@ -86,24 +83,9 @@ public class IntroActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            List<String> tableCreateSqlQueryList = new ArrayList<>();
-            // For user_info table
-            tableCreateSqlQueryList.add("CREATE TABLE IF NOT EXISTS user_info (user_id varchar(255),phone_no varchar(255),email varchar(255),shop_name varchar(255),mac_address varchar(255),serial_key varchar(255),active_date varchar(255),expaied_date varchar(255),package_name varchar(255),price varchar(255),client_name varchar(255),initial_password varchar(255),shop_address varchar(255),package_validity varchar(255),role varchar(255));");
+            String url = "http://167.99.76.96/arm/php/DbConnection.php";
+            serverConnector.requestSend(url, IntroActivity.this);
 
-            try {
-
-                conn = xammpConnector.CONN();
-
-                for (String sql : tableCreateSqlQueryList) {
-                    System.out.print(sql);
-                    Statement stmt = conn.createStatement();
-                    stmt.execute(sql);
-                    stmt.close();
-                }
-                conn.close();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
 
             return "Successfully";
         }
