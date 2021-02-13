@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,11 +21,18 @@ import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 import com.itvillage.AES;
 import com.itvillage.ars.ars.R;
+import com.itvillage.ars.services.ApiServices;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class ScannerActivity extends AppCompatActivity {
 
@@ -135,8 +141,7 @@ public class ScannerActivity extends AppCompatActivity {
                                 if (price.equals("")) {
                                     Toast.makeText(getApplicationContext(), "Price Fill Empty", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Doregister gg = new Doregister();
-                                    gg.execute("");
+                                    save();
                                     dialog.dismiss();
                                     sendMail();
                                 }
@@ -187,15 +192,47 @@ public class ScannerActivity extends AppCompatActivity {
         return AES.encrypt("elearners.live," + userId + ",\"elearners.live,\"", "itvillage428854");
     }
 
-    public class Doregister extends AsyncTask<String, String, String> {
+    protected String save() {
 
+        ApiServices apiServices = new ApiServices(this);
+        Observable<String> identityResponseObservable = apiServices.addNewUser(
+                userId,
+                phoneNo,
+                email,
+                shopName,
+                mac,
+                getSerialKey(),
+                Config.getCurrentDate(),
+                dateIncrement(Config.stringToDateType(Config.getCurrentDate())),
+                packageName,
+                price,
+                userName,
+                phoneNo,
+                shopAddress,
+                String.valueOf(getPackageDays(packageName)),
+                "user");
 
-        @Override
-        protected String doInBackground(String... params) {
-            String url = "http://167.99.76.96/arm/php/UserInfoInsert.php?user_id=" + userId + "&phone_no=" + phoneNo + "&email=" + email + "&shop_name=" + shopName + "&mac_address=" + mac + "&serial_key=" + getSerialKey() + "&active_date=" + Config.getCurrentDate() + "&expaied_date=" + dateIncrement(Config.stringToDateType(Config.getCurrentDate())) + "&package_name=" + packageName + "&price=" + price + "&client_name=" + userName + "&initial_password=" + phoneNo + "&shop_address=" + shopAddress + "&package_validity=" + String.valueOf(getPackageDays(packageName)) + "&role=user";
-            serverConnector.requestSend(url, ScannerActivity.this);
+        identityResponseObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<String>() {
+                    @Override
+                    public void accept(String res) throws Exception {
+                        System.out.println(res);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+                    }
+                });
 
-            return "Successfully";
-        }
+//        String url = "http://167.99.76.96/arm/php/UserInfoInsert.php?user_id=" + userId + "&phone_no=" + phoneNo + "&email=" + email + "&shop_name=" + shopName + "&mac_address=" + mac + "&serial_key=" + getSerialKey() + "&active_date=" + Config.getCurrentDate() + "&expaied_date=" + dateIncrement(Config.stringToDateType(Config.getCurrentDate())) + "&package_name=" + packageName + "&price=" + price + "&client_name=" + userName + "&initial_password=" + phoneNo + "&shop_address=" + shopAddress + "&package_validity=" + String.valueOf(getPackageDays(packageName)) + "&role=user";
+//        serverConnector.requestSend(url, ScannerActivity.this);
+
+        return "Successfully";
     }
+
 }
