@@ -29,8 +29,8 @@ public class ApiClient {
     private static Retrofit retrofit = null;
     private static int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
-    private static String BASE_URL = "http://10.0.2.2:9020/";
-    // private static String BASE_URL = "https://afridi-gameing-deploy.herokuapp.com/";
+    //private static String BASE_URL = "http://10.0.2.2:9020/";
+    private static String BASE_URL = "https://arwm-server-deploy.herokuapp.com/";
     //private static String BASE_URL = "http://123.49.62.227:9020/gdm/";
     //private static String BASE_URL = "http://10.0.2.15:9020";
     //private static String BASE_URL = "http://192.168.0.100:9020";

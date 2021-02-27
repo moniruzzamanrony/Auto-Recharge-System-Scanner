@@ -1,6 +1,7 @@
 package com.itvillage.ars;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -37,7 +38,7 @@ import io.reactivex.schedulers.Schedulers;
 public class ScannerActivity extends AppCompatActivity {
 
     Button push;
-    ServerConnector serverConnector;
+
     Connection conn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
@@ -54,7 +55,7 @@ public class ScannerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanner);
-        serverConnector = new ServerConnector();
+
         codeScannerView = findViewById(R.id.codeScannerView);
         dialog = new Dialog(ScannerActivity.this);
         openCamaraForScanner();
@@ -162,13 +163,7 @@ public class ScannerActivity extends AppCompatActivity {
                 });
             }
         });
-//        codeScannerView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                codeScanner.startPreview();
-//                dialog.dismiss();
-//            }
-//        });
+
     }
 
     private void sendMail() {
@@ -192,7 +187,8 @@ public class ScannerActivity extends AppCompatActivity {
         return AES.encrypt("elearners.live," + userId + ",\"elearners.live,\"", "itvillage428854");
     }
 
-    protected String save() {
+    @SuppressLint("CheckResult")
+    private void save() {
 
         ApiServices apiServices = new ApiServices(this);
         Observable<String> identityResponseObservable = apiServices.addNewUser(
@@ -229,10 +225,6 @@ public class ScannerActivity extends AppCompatActivity {
                     }
                 });
 
-//        String url = "http://167.99.76.96/arm/php/UserInfoInsert.php?user_id=" + userId + "&phone_no=" + phoneNo + "&email=" + email + "&shop_name=" + shopName + "&mac_address=" + mac + "&serial_key=" + getSerialKey() + "&active_date=" + Config.getCurrentDate() + "&expaied_date=" + dateIncrement(Config.stringToDateType(Config.getCurrentDate())) + "&package_name=" + packageName + "&price=" + price + "&client_name=" + userName + "&initial_password=" + phoneNo + "&shop_address=" + shopAddress + "&package_validity=" + String.valueOf(getPackageDays(packageName)) + "&role=user";
-//        serverConnector.requestSend(url, ScannerActivity.this);
-
-        return "Successfully";
     }
 
 }
